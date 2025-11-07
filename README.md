@@ -1,11 +1,3 @@
-Com certeza, Rafael. Um bom `README.md` é crucial para um hackathon, pois é a primeira coisa que os juízes (e outros desenvolvedores) irão ler.
-
-Aqui está uma proposta de `README.md` completo para o seu projeto "Cofre Comunitário", formatado em Markdown.
-
------
-
-(Início do `README.md`)
-
 # Cofre Comunitário 🏦 (Community Vault)
 
 > Projeto submetido ao **[Scaffold-Stellar Hackathon](https://dorahacks.io/hackathon/scaffoldstellar/detail)** (Novembro 2025).
@@ -112,11 +104,3 @@ npm run dev
 ```
 
 Acesse `http://localhost:5173` (ou a porta indicada) no seu navegador.
-
------
-
-## 📝 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
-(Fim do `README.md`)
