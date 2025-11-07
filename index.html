@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Banco Comunitário - Cofre compartilhado com governança descentralizada na rede Stellar. Deposite fundos e aprove saques com 75% de consenso.">
+    <meta name="keywords" content="Banco Comunitário, Cofre Descentralizado, Stellar, Soroban, DeFi, Blockchain, Governança">
+    <meta name="author" content="Banco Comunitário">
+    <title>Banco Comunitário - Cofre Compartilhado Descentralizado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0f766e;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* ==================== HEADER / NAVBAR ==================== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            margin-top: 80px;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(15, 118, 110, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .piggy-bank {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            box-shadow: 0 20px 60px rgba(245, 158, 11, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ==================== FEATURES SECTION ==================== */
+        .features {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--gray-50);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ==================== HOW IT WORKS SECTION ==================== */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #f0fdf4 100%);
+        }
+
+        .how-it-works-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--gray-200);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+            margin-top: 1rem;
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ==================== GOVERNANCE SECTION ==================== */
+        .governance {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .governance-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .governance-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+        }
+
+        .governance-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .governance-visual {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            color: white;
+            text-align: center;
+        }
+
+        .governance-visual h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .governance-visual p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .percentage-bar {
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.2);
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .percentage-fill {
+            height: 100%;
+            width: 75%;
+            background: linear-gradient(90deg, var(--success) 0%, #34d399 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* ==================== USE CASES SECTION ==================== */
+        .use-cases {
+            padding: 5rem 2rem;
+            background: var(--gray-50);
+        }
+
+        .use-cases-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .use-case-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .use-case-card:nth-child(2) {
+            border-left-color: var(--secondary);
+        }
+
+        .use-case-card:nth-child(3) {
+            border-left-color: var(--accent);
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .use-case-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .use-case-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ==================== TECHNOLOGY SECTION ==================== */
+        .technology {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            color: white;
+        }
+
+        .technology-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .technology .section-header h2,
+        .technology .section-header p {
+            color: white;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .tech-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-item h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ==================== CTA SECTION ==================== */
+        .cta {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .cta .btn-secondary {
+            color: var(--primary);
+            border-color: white;
+            background: white;
+        }
+
+        .cta .btn-secondary:hover {
+            background: var(--gray-100);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .piggy-bank {
+                width: 200px;
+                height: 200px;
+                font-size: 80px;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .governance-container {
+                grid-template-columns: 1fr;
+            }
+
+            .governance-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+                margin-top: 70px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .features, .how-it-works, .governance, .use-cases, .technology, .cta {
+                padding: 3rem 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-card, .step-card, .use-case-card, .tech-item {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon">🏦</div>
+                Banco Comunitário
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Funcionalidades</a></li>
+                <li><a href="#how-it-works">Como Funciona</a></li>
+                <li><a href="#governance">Governança</a></li>
+                <li><a href="#use-cases">Casos de Uso</a></li>
+                <li><a href="#technology">Tecnologia</a></li>
+            </ul>
+            <button class="btn-primary">Lançar Aplicativo</button>
+        </nav>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    Cofre Compartilhado com <span class="highlight">Governança Descentralizada</span>
+                </h1>
+                <p>
+                    Deposite fundos com segurança e aprove saques com consenso de 75% da comunidade. Um banco comunitário transparente, seguro e descentralizado na rede Stellar.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Começar Agora</button>
+                    <button class="btn-secondary">Saiba Mais</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="piggy-bank">🐷</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES SECTION ==================== -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header">
+                <h2>Funcionalidades Principais</h2>
+                <p>Tudo que você precisa para gerenciar um cofre comunitário seguro e transparente</p>
+            </div>
+        </div>
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Segurança Máxima</h3>
+                <p>Smart contracts auditados na rede Stellar garantem que seus fundos estejam sempre protegidos e inacessíveis sem aprovação.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Governança Democrática</h3>
+                <p>Saques requerem aprovação de 75% dos membros, garantindo que as decisões sejam tomadas coletivamente.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Depósitos Simples</h3>
+                <p>Conecte sua carteira Stellar e comece a depositar XLM em segundos. Sem taxas ocultas, sem complicações.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Transparência Total</h3>
+                <p>Visualize em tempo real o saldo total, histórico de transações e status de votações de saques.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Transações Rápidas</h3>
+                <p>Beneficie-se da velocidade da rede Stellar com confirmações em segundos e custos mínimos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Acessível Globalmente</h3>
+                <p>Participe de um cofre comunitário de qualquer lugar do mundo com apenas uma conexão à internet.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS SECTION ==================== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="how-it-works-container">
+            <div class="section-header">
+                <h2>Como Funciona</h2>
+                <p>Quatro passos simples para começar a usar o Banco Comunitário</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Conectar Carteira</h3>
+                    <p>Conecte sua carteira Stellar (Freighter ou outra compatível) ao aplicativo em segundos.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Depositar Fundos</h3>
+                    <p>Envie XLM para o cofre compartilhado. Seus fundos são imediatamente creditados no contrato.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Participar da Governança</h3>
+                    <p>Vote em propostas de saque. Sua voz importa! Saques só acontecem com 75% de aprovação.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Acompanhar em Tempo Real</h3>
+                    <p>Veja o saldo total, histórico de transações e status de votações no painel transparente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GOVERNANCE SECTION ==================== -->
+    <section class="governance" id="governance">
+        <div class="governance-container">
+            <div class="governance-content">
+                <h2>Governança Baseada em Consenso</h2>
+                <p>
+                    O Banco Comunitário funciona como um "cofrinho de porco" digital, mas com uma diferença crucial: o martelo que quebra o cofrinho é muito pesado.
+                </p>
+                <p>
+                    Você precisa da ajuda de muitas pessoas para quebrar o porquinho. Apenas com o consenso de 75% dos membros, o dinheiro pode ser acessado.
+                </p>
+                <p>
+                    Isso garante que nenhuma pessoa individual possa fazer saques sem aprovação coletiva, criando um sistema verdadeiramente democrático e seguro.
+                </p>
+            </div>
+            <div class="governance-visual">
+                <h3>Aprovação Necessária</h3>
+                <p>Consenso para Saques</p>
+                <div class="percentage-bar">
+                    <div class="percentage-fill">75%</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    Saques só são processados quando 75% ou mais dos membros votam a favor.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== USE CASES SECTION ==================== -->
+    <section class="use-cases" id="use-cases">
+        <div class="use-cases-container">
+            <div class="section-header">
+                <h2>Casos de Uso</h2>
+                <p>Veja como o Banco Comunitário pode ser aplicado em diferentes cenários</p>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <h3>💼 Fundo de Investimento Empresarial</h3>
+                    <p>
+                        Múltiplos sócios depositam capital inicial. Saques para investimentos estratégicos só ocorrem com aprovação da maioria, garantindo alinhamento de objetivos.
+                    </p>
+                </div>
+                <div class="use-case-card">
+                    <h3>👨‍👩‍👧‍👦 Poupança Familiar</h3>
+                    <p>
+                        Famílias criam um fundo coletivo para emergências ou objetivos comuns. Saques para despesas importantes requerem consenso familiar.
+                    </p>
+                </div>
+                <div class="use-case-card">
+                    <h3>🎓 Fundo Educacional Comunitário</h3>
+                    <p>
+                        Comunidades arrecadam fundos para bolsas de estudo. Distribuição de recursos é feita de forma democrática e transparente.
+                    </p>
+                </div>
+                <div class="use-case-card">
+                    <h3>🤝 Cooperativas e Associações</h3>
+                    <p>
+                        Organizações comunitárias gerenciam fundos coletivos com governança descentralizada e total transparência.
+                    </p>
+                </div>
+                <div class="use-case-card">
+                    <h3>🏗️ Projetos Comunitários</h3>
+                    <p>
+                        Financie projetos locais com fundos aprovados democraticamente. Cada membro tem voz nas decisões de gastos.
+                    </p>
+                </div>
+                <div class="use-case-card">
+                    <h3>💎 Grupos de Investimento</h3>
+                    <p>
+                        Investidores se unem em um fundo comum. Decisões de alocação de capital requerem consenso do grupo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TECHNOLOGY SECTION ==================== -->
+    <section class="technology" id="technology">
+        <div class="technology-container">
+            <div class="section-header">
+                <h2>Tecnologia de Ponta</h2>
+                <p>Construído com o melhor stack blockchain disponível</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">⛓️</div>
+                    <h3>Stellar Network</h3>
+                    <p>Rede blockchain rápida, segura e com custos mínimos.</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🦀</div>
+                    <h3>Soroban (Rust)</h3>
+                    <p>Smart contracts seguros e eficientes compilados em WebAssembly.</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚛️</div>
+                    <h3>React + TypeScript</h3>
+                    <p>Interface moderna, responsiva e segura com tipagem estática.</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔌</div>
+                    <h3>Stellar Wallet Kit</h3>
+                    <p>Integração padrão com carteiras Stellar (Freighter, etc).</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <h3>Vite</h3>
+                    <p>Build tool moderno para desenvolvimento rápido e otimizado.</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔒</div>
+                    <h3>Segurança Auditada</h3>
+                    <p>Smart contracts auditados e melhores práticas de segurança.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="cta">
+        <div class="cta-container">
+            <h2>Pronto para Revolucionar a Forma Como Você Gerencia Fundos Comunitários?</h2>
+            <p>
+                Junte-se a centenas de comunidades que já estão usando o Banco Comunitário para gerenciar fundos com segurança, transparência e democracia.
+            </p>
+            <button class="btn-secondary">Lançar o Aplicativo Agora</button>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Banco Comunitário</h3>
+                <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem;">
+                    Cofre compartilhado descentralizado na rede Stellar com governança democrática.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Recursos</h3>
+                <ul>
+                    <li><a href="#features">Funcionalidades</a></li>
+                    <li><a href="#how-it-works">Como Funciona</a></li>
+                    <li><a href="#governance">Governança</a></li>
+                    <li><a href="#use-cases">Casos de Uso</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Comunidade</h3>
+                <ul>
+                    <li><a href="#">Discord</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Documentação</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Segurança</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Banco Comunitário. Construído com Stellar e Soroban. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll behavior para links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Efeito de scroll na navbar
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Animação de entrada dos cards ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .step-card, .use-case-card, .tech-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
